@@ -29,35 +29,67 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* Calculator specific styles */
 .calculator-button {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark theme calculator styles */
+.dark .calculator-button {
   box-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.calculator-button:hover {
+.dark .calculator-button:hover {
   box-shadow: 
     0 4px 12px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.calculator-button:active {
+.dark .calculator-button:active {
   transform: scale(0.95);
   box-shadow: 
     0 1px 4px rgba(0, 0, 0, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
+/* Light theme calculator styles */
+.light .calculator-button {
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.light .calculator-button:hover {
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.light .calculator-button:active {
+  transform: scale(0.95);
+  box-shadow: 
+    0 1px 4px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
 /* Calculator glow effect */
-.calculator-container {
+.dark .calculator-container {
   box-shadow: 
     0 0 50px rgba(0, 0, 0, 0.8),
     0 0 100px rgba(0, 0, 0, 0.4);
+}
+
+.light .calculator-container {
+  box-shadow: 
+    0 0 50px rgba(0, 0, 0, 0.1),
+    0 0 100px rgba(0, 0, 0, 0.05);
 }
 
 /* Enhanced animated aurora gradient layers - 25% more intense */
@@ -176,5 +208,7 @@ body {
 .animate-bounce-horizontal {
   animation: bounce-horizontal 1.5s ease-in-out infinite;
 }
+
+
 
 

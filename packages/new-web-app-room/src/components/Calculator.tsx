@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useEffect } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface CalculatorState {
   display: string;
@@ -10,6 +11,7 @@ interface CalculatorState {
 }
 
 const Calculator = () => {
+  const { theme } = useTheme();
   const [state, setState] = useState<CalculatorState>({
     display: '0',
     previousValue: null,
@@ -206,9 +208,13 @@ const Calculator = () => {
     const baseClasses = "h-16 w-16 rounded-full font-medium text-xl calculator-button select-none";
     
     const variantClasses = {
-      number: "bg-gray-700 text-white hover:bg-gray-600 active:bg-gray-800",
+      number: theme === 'light' 
+        ? "bg-gray-200 text-gray-900 hover:bg-gray-300 active:bg-gray-100" 
+        : "bg-gray-700 text-white hover:bg-gray-600 active:bg-gray-800",
       operator: "bg-orange-500 text-white hover:bg-orange-400 active:bg-orange-600",
-      function: "bg-gray-400 text-black hover:bg-gray-300 active:bg-gray-500"
+      function: theme === 'light'
+        ? "bg-gray-300 text-gray-900 hover:bg-gray-400 active:bg-gray-200"
+        : "bg-gray-400 text-black hover:bg-gray-300 active:bg-gray-500"
     };
 
     return (
@@ -222,10 +228,20 @@ const Calculator = () => {
   };
 
   return (
-    <div className="bg-black p-6 rounded-3xl shadow-2xl border border-gray-800 max-w-sm mx-auto backdrop-blur-sm calculator-container">
+    <div className={`p-6 rounded-3xl shadow-2xl max-w-sm mx-auto backdrop-blur-sm calculator-container transition-all duration-500 ${
+      theme === 'light' 
+        ? 'bg-white/90 border border-gray-200' 
+        : 'bg-black border border-gray-800'
+    }`}>
       {/* Display */}
-      <div className="bg-black rounded-2xl p-6 mb-4 border border-gray-900">
-        <div className="text-right text-white text-5xl font-light min-h-[60px] flex items-end justify-end overflow-hidden leading-none transition-all duration-200">
+      <div className={`rounded-2xl p-6 mb-4 transition-all duration-500 ${
+        theme === 'light'
+          ? 'bg-gray-50 border border-gray-200'
+          : 'bg-black border border-gray-900'
+      }`}>
+        <div className={`text-right text-5xl font-light min-h-[60px] flex items-end justify-end overflow-hidden leading-none transition-all duration-200 ${
+          theme === 'light' ? 'text-gray-900' : 'text-white'
+        }`}>
           {formatDisplay(state.display)}
         </div>
       </div>
@@ -307,6 +323,10 @@ const Calculator = () => {
 };
 
 export default Calculator;
+
+
+
+
 
 
 
